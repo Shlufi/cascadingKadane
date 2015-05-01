@@ -1,13 +1,13 @@
 #!/usr/bin/pyhton
 
-# Globals
-FILENAME     = 'FOO.txt'
+# Globals To be set by user
+FILENAME     = 'FOO.csv'
 NUM_FEATURES = 10
 
 
 import cvs
 
-class fileStruct:
+class FileStruct:
         def __init__(self):
             self.cols = 0
             self.rows = 0
@@ -30,7 +30,7 @@ class fileStruct:
                     for col in xrange(1, self.cols - 2):
                         dataCell = self.initDataCell(row, col) 
 
-        def initDataCell(row, col):
+        def initDataCell(self, row, col):
             parentID      = self.spreadSheet[row][0]
             featureVal    = self.spreadSheet[row][col]
             featureNumber = col + -1
@@ -41,7 +41,7 @@ class fileStruct:
 
 
 class DataCell:
-        def __init__(parentID, featureVal, featureNumber, isTarget, weight):
+        def __init__(self, parentID, featureVal, featureNumber, isTarget, weight):
             
             self.parentID      = parentID
             self.featureVal    = featureVal 
@@ -49,11 +49,25 @@ class DataCell:
             self.isTarget      = isTarget 
             self.weight        = weight 
 
-class DataColum:
-    def __init__(colList)
-            
-            self.featureNumber = colList[0].featureVal 
+       def calcWeight(self):
+            if self.isTarget:
+                return abs(self.weight)
+            else:
+                return -abs(self.weight)
 
+
+class DataColum:
+    def __init__(self,_colList, _initScale, _deltaScale)
+            self.featureNumber = _colList[0].featureVal 
+            self.colList       = _colList
+            self.initScale     = _initScale
+            self.deltaScale    = _deltaScale
+
+    def kadane(self):
+        ''' Runs an iteration of Kadane on the given column, with the specified weights)'''
+        for dataCell in self.colList:
+            weight = dataCell.calcWeight() 
+            curMax = max(0, curMax + dataCell.weight
 
 
 
