@@ -69,9 +69,28 @@ class DataColum:
             weight = dataCell.calcWeight() 
             curMax = max(0, curMax + dataCell.weight
 
+            
 
+def kadaneWithScale(inputCVS):
+    
+    bestFeatures = []
+    initScale  =  [.02*x for x in xrange(40, 60)]
+    deltaScale =  [.02*x for x in xrange(40, 60)]
+
+    for initS in initScale:
+        for deltaS in deltaScale:
+            bestFeatData = calcBestFeature(initS, deltaS, inputCVS)
+
+            bestFeatures.append(bestFeatData)
+    
+    return bestFeatures
+
+
+def outPutThresholds(thresholdList):
+    
 
 if __name__ == '__main__':
             
     
     inputCSV = fileStruct()
+    
